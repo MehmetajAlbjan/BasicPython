@@ -1,7 +1,8 @@
-from typing import List
-def reverseMatrix(s: List[List[int]]) -> List[List[int]]:
-    return [e[::-1] for e in s]
-        
+def mirror_matrix(matrix: list[list[int]]) -> list:
+    result = []
+    for row in matrix:
+        result.append(row[::-1])
+    return result
 ## Test ##
 inpu = [
     [1, 2, 3],
