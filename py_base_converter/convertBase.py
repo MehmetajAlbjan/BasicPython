@@ -1,29 +1,23 @@
-def convert_base(num: str, from_base: int, to_base: int) -> str:
-    digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    
-    try:
-        if not 2 <= from_base <= 36:
-            return "ERROR"
-        if not 2 <= to_base <= 36:
-            return "ERROR"
-        
-        n = int(num, from_base)
-        if n == 0:
-            return "0"
-        
-        res = ""
-        while n:
-            res += digits[n % to_base]
-            n //= to_base
-        
-        return res[::-1]
-    except Exception:
+def conver_base(number: str, from_base: int, to_base: int):
+    digit = "0123456789ABCDEFGHJKLMNOPQRSTUVWXYZ"
+    decimal = 0
+    if (from_base <= 1 or from_base > 36 or to_base <= 1 or to_base > 36):
         return "ERROR"
+    for char in number:
+        if digit.index(char.upper()) >= from_base:
+            return "ERROR"
+        decimal = decimal * from_base + digit.index(char.upper())
+    if decimal == 0:
+        return "0"
 
-print(convert_base("Ff", 16, 10)) # "255"
-print(convert_base("00FF", 16, 2)) # "11111111"
-print(convert_base("z", 36, 10)) # "35"
-print(convert_base("0000", 7, 10)) # "0"
-print(convert_base("0001", 2, 10)) # "1"
-print(convert_base("1010", 2, 16)) # "A"
-print(convert_base("133742", 8, 42)) #ERROR
+    result = ""
+    while decimal > 0:
+        result = digit[decimal % to_base] + result
+        decimal = decimal // to_base
+    return result
+
+
+print(conver_base("10", 10, 2))
+print(conver_base("F", 4, 2))
+print(conver_base("F", 16, 2))
+print(conver_base("F",2,16))
